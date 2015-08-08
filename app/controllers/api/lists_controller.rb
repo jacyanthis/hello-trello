@@ -2,7 +2,7 @@ class Api::ListsController < ApplicationController
   def create
     @list = List.new(list_params)
     if @list.save
-      render 'show'
+      render json: @list
     else
       render json: @list.errors.full_messages, status: :unprocessable_entity
     end
@@ -26,6 +26,6 @@ class Api::ListsController < ApplicationController
   private
 
   def list_params
-    params[:list].permit(:title, :ord)
+    params[:list].permit(:title, :board_id, :ord)
   end
 end

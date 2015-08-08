@@ -1,5 +1,5 @@
-Hello.Views.BoardNew = Backbone.View.extend({
-  template: JST['board_new'],
+Hello.Views.NewList = Backbone.View.extend({
+  template: JST['new_list'],
 
   tagName: "form",
 
@@ -7,8 +7,13 @@ Hello.Views.BoardNew = Backbone.View.extend({
     'submit': 'submit'
   },
 
+  initialize: function (options) {
+    this.boardId = options.boardId;
+    this.ord = 0;
+  },
+
   render: function () {
-    this.$el.html(this.template({ board: this.model }));
+    this.$el.html(this.template({ list: this.model }));
 
     return this;
   },
@@ -17,12 +22,12 @@ Hello.Views.BoardNew = Backbone.View.extend({
     e.preventDefault();
 
     var attrs = $(e.target).serializeJSON();
-    debugger
+    attrs.board_id = this.boardId;
+    attrs.ord = this.ord;
 
-    var success = function (model) {
+    var success = function () {
       this.collection.add(this.model);
-      debugger
-      Backbone.history.navigate("/boards/" + this.model.id, { trigger: true });
+      this.$el[0].reset();
     }.bind(this);
 
     function errors(model, response) {

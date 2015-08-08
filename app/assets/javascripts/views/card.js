@@ -1,14 +1,14 @@
-Hello.Views.BoardListItem = Backbone.View.extend({
+Hello.Views.Card = Backbone.View.extend({
   tagName: "li",
 
-  template: JST["board_list_item"],
+  template: JST["card"],
 
   initialize: function () {
     this.listenTo(this.model, "sync", this.render);
   },
 
   render: function () {
-    this.$el.html(this.template({ board: this.model }));
+    this.$el.append(this.template({ card: this.model }));
 
     return this;
   }

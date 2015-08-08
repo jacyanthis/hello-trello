@@ -5,6 +5,7 @@ Hello.Views.BoardsIndex = Backbone.CompositeView.extend({
     this.listenTo(this.collection, "sync", this.render);
     this.listenTo(this.collection, "add", this.addBoardSubview);
     this.collection.each(this.addBoardSubview.bind(this));
+    window.collection = this;
   },
 
 
