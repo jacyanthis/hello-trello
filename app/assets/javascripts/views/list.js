@@ -17,18 +17,29 @@ Hello.Views.List = Backbone.CompositeView.extend({
       collection: this.model.cards(),
       listId: this.model.id
     });
-    this.addSubview("div#new-card-form", newCardView);
+    this.addSubview("div.new-card-form", newCardView);
   },
 
   addCardSubview: function (card) {
     var cardView = new Hello.Views.Card({ model: card });
-    this.addSubview("ul#cards-index", cardView);
+    this.addSubview("ul.cards-index", cardView);
   },
 
   render: function () {
     this.$el.html(this.template({ list: this.model }));
     this.attachSubviews();
+    // debugger
 
+    this.onRender();
     return this;
+  },
+
+  onRender: function () {
+    // debugger
+    this.$('ul.cards-index').sortable({
+      // items: 'li.card',
+      connectWith: 'ul.cards-index'
+    });
+    Backbone.CompositeView.prototype.onRender.call(this);
   }
 });

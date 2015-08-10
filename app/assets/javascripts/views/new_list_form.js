@@ -28,7 +28,8 @@ Hello.Views.NewList = Backbone.View.extend({
     var success = function () {
       this.model.set('ord', this.model.get('id'));
       this.collection.add(this.model);
-      this.$el[0].reset();
+      this.model = new Hello.Models.List();
+      this.render();
     }.bind(this);
 
     function errors(model, response) {

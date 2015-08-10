@@ -12,4 +12,58 @@
  *
  *= require_tree .
  *= require_self
+ *= require jquery-ui/sortable
  */
+
+body {
+  font-size: 25px;
+  background-color: #00CCFF;
+}
+
+li {
+  list-style: none;
+}
+
+input {
+  font-size: 25px;
+}
+
+li.card {
+  background-color: white;
+  border: solid black 3px;
+  clear: both;
+  float: left;
+}
+
+.boards-index {
+  position: relative;
+}
+
+.boards-index li {
+  float: left;
+  padding: 10px;
+  border: solid black 2px;
+  background-color: white;
+}
+
+ul#lists-index {
+  position: relative;
+}
+
+ul#lists-index > li {
+ float: left;
+ border: solid black 5px;
+ padding: 10px;
+ margin: 10px;
+ box-sizing: border-box;
+}
+
+ul.cards-index {
+  min-height: 100px;
+}
+
+.boards-index:after, #lists-index:after {
+  content: "";
+  display: block;
+  clear: both;
+}

@@ -1,5 +1,6 @@
 Hello.Views.Card = Backbone.View.extend({
   tagName: "li",
+  className: "card",
 
   template: JST["card"],
 
@@ -8,7 +9,7 @@ Hello.Views.Card = Backbone.View.extend({
   },
 
   render: function () {
-    this.$el.append(this.template({ card: this.model }));
+    this.$el.html(this.template({ card: this.model }));
 
     return this;
   }

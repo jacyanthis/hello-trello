@@ -11,7 +11,7 @@ class Api::CardsController < ApplicationController
   def update
     @card = Card.find(params[:id])
     if @card.update(card_params)
-      render 'show'
+      render jason: @card
     else
       render json: @card.errors.full_messages, status: :unprocessable_entity
     end

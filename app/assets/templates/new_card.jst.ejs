@@ -2,16 +2,11 @@
 </ul>
 
 <form>
-  New Card:
   <input
     type="text"
     name="title"
-    value="<%= card.escape("title") %>">
-  <br>
-  <textarea
-    name="description"
-    value="<%= card.escape("description") %>">
-  </textarea>
+    value="<%= card.escape("title") %>"
+    placeholder="New card..">
 
   <input type="submit">
 </form>

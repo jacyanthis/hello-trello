@@ -7,6 +7,7 @@ Hello.Views.BoardShow = Backbone.CompositeView.extend({
   },
 
   initialize: function () {
+    // this.$('ul#lists-index').disableSelection();
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.model.lists(), "add", this.addListSubview);
 
@@ -28,6 +29,12 @@ Hello.Views.BoardShow = Backbone.CompositeView.extend({
     this.$el.html(this.template({ board: this.model }));
     this.attachSubviews();
 
+    this.onRender();
     return this;
+  },
+
+  onRender: function () {
+    this.$('ul#lists-index').sortable();
+    Backbone.CompositeView.prototype.onRender.call(this);
   }
 });
