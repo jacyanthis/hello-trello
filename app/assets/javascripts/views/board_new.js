@@ -21,7 +21,6 @@ Hello.Views.BoardNew = Backbone.View.extend({
 
     var success = function (model) {
       this.collection.add(this.model);
-      debugger
       Backbone.history.navigate("/boards/" + this.model.id, { trigger: true });
     }.bind(this);
 

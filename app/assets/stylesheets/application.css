@@ -33,6 +33,8 @@ li.card {
   border: solid black 3px;
   clear: both;
   float: left;
+  margin: 3px;
+  box-sizing: border-box;
 }
 
 .boards-index {

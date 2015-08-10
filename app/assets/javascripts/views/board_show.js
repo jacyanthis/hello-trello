@@ -33,8 +33,56 @@ Hello.Views.BoardShow = Backbone.CompositeView.extend({
     return this;
   },
 
+  // setOrds: function () {
+  //   var i = 0;
+  //   this.$('li').each(function (listItem) {
+  //     $(listItem).attr('ord', i);
+  //     i += 1;
+  //   });
+  // },
+
   onRender: function () {
-    this.$('ul#lists-index').sortable();
+    this.$('ul#lists-index').sortable({
+      // remove: function (e, ui) {
+      //   var new_position
+      //
+      //   // update ords of starting list
+      // }.bind(this),
+      //
+      // receive: function (e, ui) {
+      //   // update ords of receiving list
+      // }.bind(this)
+      start: function (e, ui) {
+        ui.item.data('oldIndex', ui.item.index());
+      },
+
+      update: function (e, ui) {
+        var newIndex = ui.item.index();
+        var oldIndex = ui.item.data('oldIndex');
+        this.updateOrds(oldIndex, newIndex);
+      }.bind(this)
+    });
     Backbone.CompositeView.prototype.onRender.call(this);
+  },
+
+  updateOrds: function (oldIndex, newIndex) {
+    this.model.lists().each(function (list) {
+      var listOrd = list.get('ord');
+
+      if (listOrd === oldIndex) {
+        listOrd = newIndex;
+      } else {
+        var listOrdTemp = listOrd;
+        if (listOrd > oldIndex) {
+          listOrd -= 1;
+        }
+        if (listOrdTemp >= newIndex) {
+          listOrd += 1;
+        }
+      }
+      
+      list.set('ord', listOrd);
+      list.save();
+    });
   }
 });
