@@ -9,7 +9,9 @@ Hello.Views.BoardsIndex = Backbone.CompositeView.extend({
 
 
   addBoardSubview: function (board) {
-    var boardListItem = new Hello.Views.BoardListItem({ model: board });
+    var boardListItem = new Hello.Views.BoardListItem({
+      model: board
+    });
     this.addSubview("ul.boards-index", boardListItem);
   },
 

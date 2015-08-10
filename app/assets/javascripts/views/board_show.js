@@ -11,7 +11,6 @@ Hello.Views.BoardShow = Backbone.CompositeView.extend({
     this.listenTo(this.model.lists(), "add", this.addListSubview);
 
     var newList = new Hello.Models.List();
-
     var newListView = new Hello.Views.NewList({
       model: newList,
       collection: this.model.lists(),

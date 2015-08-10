@@ -8,7 +8,6 @@ Hello.Views.NewCard = Backbone.View.extend({
   },
 
   initialize: function (options) {
-    // debugger
     this.listId = options.listId;
     this.ord = 0;
   },
@@ -35,7 +34,6 @@ Hello.Views.NewCard = Backbone.View.extend({
 
     function errors(model, response) {
       $('.errors').empty();
-      debugger
       response.responseJSON.forEach(function (el) {
         var $li = $('<li></li>');
         $li.text(el);

@@ -1,4 +1,4 @@
-json.(@board, :title)
+json.(@board, :id, :title)
 
 json.lists @board.lists do |list|
   json.(list, :id, :title, :ord)

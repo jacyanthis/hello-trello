@@ -2,7 +2,11 @@ class Api::TodoItemsController < ApplicationController
   def create
     @todo_item = TodoItem.new(todo_item_params)
     if @todo_item.save
+<<<<<<< HEAD
       render json: @todo_item
+=======
+      render 'show'
+>>>>>>> f23dbb1342483289cfb3a882b462b552ef3da86a
     else
       render json: @todo_item.errors.full_messages, status: :unprocessable_entity
     end
