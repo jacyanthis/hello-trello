@@ -33,25 +33,8 @@ Hello.Views.BoardShow = Backbone.CompositeView.extend({
     return this;
   },
 
-  // setOrds: function () {
-  //   var i = 0;
-  //   this.$('li').each(function (listItem) {
-  //     $(listItem).attr('ord', i);
-  //     i += 1;
-  //   });
-  // },
-
   onRender: function () {
     this.$('ul#lists-index').sortable({
-      // remove: function (e, ui) {
-      //   var new_position
-      //
-      //   // update ords of starting list
-      // }.bind(this),
-      //
-      // receive: function (e, ui) {
-      //   // update ords of receiving list
-      // }.bind(this)
       start: function (e, ui) {
         ui.item.data('oldIndex', ui.item.index());
       },
@@ -59,30 +42,36 @@ Hello.Views.BoardShow = Backbone.CompositeView.extend({
       update: function (e, ui) {
         var newIndex = ui.item.index();
         var oldIndex = ui.item.data('oldIndex');
-        this.updateOrds(oldIndex, newIndex);
+        var up = oldIndex < newIndex;
+        this.updateOrds(oldIndex, newIndex, up);
       }.bind(this)
     });
     Backbone.CompositeView.prototype.onRender.call(this);
   },
 
-  updateOrds: function (oldIndex, newIndex) {
+  updateOrds: function (oldIndex, newIndex, up) {
     this.model.lists().each(function (list) {
       var listOrd = list.get('ord');
-
       if (listOrd === oldIndex) {
         listOrd = newIndex;
+      } else if (listOrd === newIndex) {
+        if (up) {
+          listOrd -= 1;
+        } else {
+          listOrd += 1;
+        }
       } else {
         var listOrdTemp = listOrd;
         if (listOrd > oldIndex) {
           listOrd -= 1;
         }
-        if (listOrdTemp >= newIndex) {
+
+        if (listOrdTemp > newIndex) {
           listOrd += 1;
         }
       }
-      
       list.set('ord', listOrd);
       list.save();
     });
-  }
+  },
 });

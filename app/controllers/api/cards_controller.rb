@@ -11,7 +11,7 @@ class Api::CardsController < ApplicationController
   def update
     @card = Card.find(params[:id])
     if @card.update(card_params)
-      render jason: @card
+      render json: @card
     else
       render json: @card.errors.full_messages, status: :unprocessable_entity
     end
@@ -20,7 +20,7 @@ class Api::CardsController < ApplicationController
   def destroy
     @card = Card.find(params[:id])
     @card.destroy
-    render 'show'
+    render json: @card
   end
 
   private
